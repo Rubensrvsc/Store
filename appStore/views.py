@@ -3,8 +3,6 @@ from .models import *
 from .serializers import *
 from rest_framework import generics
 
-# Create your views here.
-
 class ProductTypeView(generics.ListCreateAPIView):
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
