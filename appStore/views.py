@@ -28,3 +28,8 @@ class ProductView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+class ProductDetailView(generics.RetrieveAPIView):
+    lookup_field = "id"
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
