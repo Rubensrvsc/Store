@@ -7,4 +7,5 @@ urlpatterns = [
     path('producttypes',ProductTypeView.as_view(),name="product_types"),
     path('productcategories',ProductCategoryView.as_view(),name="product_categories"),
     path('products',ProductView.as_view(),name="products"),
+    path('',api_root,name="api_root"),
 ]
