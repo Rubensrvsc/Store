@@ -5,11 +5,20 @@ from django.db import models
 class ProductType(models.Model):
     name_product_type = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name_product_type
+
 class Size(models.Model):
     size = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.size
     
 class ProductCategory(models.Model):
     name_product_category = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name_product_category
     
 class Product(models.Model):
     name_product = models.CharField(max_length=100)
