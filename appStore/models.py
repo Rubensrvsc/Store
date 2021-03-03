@@ -28,3 +28,5 @@ class Product(models.Model):
     product_size = models.ForeignKey(Size, related_name="size_product",on_delete=models.CASCADE)
     product_type = models.ForeignKey(ProductType, related_name="type_product",on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.name_product
