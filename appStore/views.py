@@ -33,4 +33,9 @@ class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+class ProductUpdateView(generics.UpdateAPIView):
+    lookup_field = "id"
+    queryset = Product.objects.all()
+    serializer_class = ProductUpdateSerializer
+
 
