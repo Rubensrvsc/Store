@@ -19,6 +19,11 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['name_product','color','price','product_category','product_size','product_type']
+
+    def validate_price(self, data):
+        if data < 0:
+            raise serializers.ValidationError({"error": "Price less than zero"})
+        return data
     
 class ProductUpdateSerializer(serializers.ModelSerializer):
 
@@ -29,4 +34,9 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['name_product','color','price']
+    
+    def validate_price(self, data):
+        if data < 0:
+            raise serializers.ValidationError({"error": "Price less than zero"})
+        return data
     
