@@ -11,9 +11,9 @@ from rest_framework.response import Response
 @api_view(['GET'])
 def api_root(request,format=None):
     return Response({
-        'products': reverse('products',request=request,format=format),
-        'product type': reverse('product_types',request=request,format=format),
-        'product category': reverse('product_categories',request=request,format=format),
+        'products': reverse('api:products',request=request,format=format),
+        'product type': reverse('api:product_types',request=request,format=format),
+        'product category': reverse('api:product_categories',request=request,format=format),
     })
 
 class ProductTypeView(generics.ListCreateAPIView):
