@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from django.http import JsonResponse
+from rest_framework import status
 
 # Create your views here.
 
@@ -54,6 +55,8 @@ class SearchProductView(APIView):
     queryset = Product.objects.all()
     serializer_class = SearchProductNameSerializer
 
+    def get(self,request):
+        return Response(status=status.HTTP_200_OK)
 
     def post(self,request):
         return JsonResponse(list(self.queryset.filter(name_product__contains=request.data['name_search_product']).values('name_product',
