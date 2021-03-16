@@ -12,6 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 @api_view(['GET'])
 def api_root(request,format=None):
     return Response({
+        'create_product': reverse('api:create_product',request=request,format=format),
         'products': reverse('api:products',request=request,format=format),
         'product type': reverse('api:product_types',request=request,format=format),
         'product category': reverse('api:product_categories',request=request,format=format),
@@ -28,8 +29,12 @@ class ProductCategoryView(generics.ListCreateAPIView):
 class ProductView(generics.ListAPIView):
     lookup_field = "id"
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductListSerializer
     pagination_class = PageNumberPagination
+
+class ProductCreateView(generics.CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 class ProductDetailView(generics.RetrieveAPIView):
     lookup_field = "id"
