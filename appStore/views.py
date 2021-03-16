@@ -15,8 +15,9 @@ from django.http import JsonResponse
 @api_view(['GET'])
 def api_root(request,format=None):
     return Response({
-        'create_product': reverse('api:create_product',request=request,format=format),
         'products': reverse('api:products',request=request,format=format),
+        'create product': reverse('api:create_product',request=request,format=format),
+        'search product': reverse('api:search-product',request=request,format=format),
         'product type': reverse('api:product_types',request=request,format=format),
         'product category': reverse('api:product_categories',request=request,format=format),
     })
@@ -53,5 +54,8 @@ class SearchProductView(APIView):
     queryset = Product.objects.all()
     serializer_class = SearchProductNameSerializer
 
+
     def post(self,request):
-        return JsonResponse(list(self.queryset.filter(name_product__contains=request.data['name_search_product']).values()),safe=False)
+        return JsonResponse(list(self.queryset.filter(name_product__contains=request.data['name_search_product']).values('name_product',
+        'color','price','product_size__size','product_category__name_product_category',
+        'product_type__name_product_type')),safe=False)
