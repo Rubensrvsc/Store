@@ -20,11 +20,6 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
-    def validate_price(self, data):
-        if data < 0:
-            raise serializers.ValidationError({"error": "Price less than zero"})
-        return data
-
 class ProductListSerializer(serializers.ModelSerializer):
 
     product_size = serializers.PrimaryKeyRelatedField(source='product_size.size',queryset=Size.objects.all())
@@ -50,5 +45,14 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
     def validate_price(self, data):
         if data < 0:
             raise serializers.ValidationError({"error": "Price less than zero"})
+        return data
+
+class SearchProductNameSerializer(serializers.Serializer):
+
+    name_search_product = serializers.CharField()
+
+    def validate_name_search_product(self, data):
+        if data is None:
+            raise serializers.ValidationError({'error':'name is empty'})
         return data
     

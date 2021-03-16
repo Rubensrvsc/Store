@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from .models import *
 from .serializers import *
+import json
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -46,4 +49,9 @@ class ProductUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductUpdateSerializer
 
+class SearchProductView(APIView):
+    queryset = Product.objects.all()
+    serializer_class = SearchProductNameSerializer
 
+    def post(self,request):
+        return JsonResponse(list(self.queryset.filter(name_product__contains=request.data['name_search_product']).values()),safe=False)
