@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 # Create your views here.
 
@@ -28,6 +29,7 @@ class ProductView(generics.ListCreateAPIView):
     lookup_field = "id"
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    pagination_class = PageNumberPagination
 
 class ProductDetailView(generics.RetrieveAPIView):
     lookup_field = "id"
