@@ -16,6 +16,11 @@ class ProductCategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
 
+    product_size = serializers.PrimaryKeyRelatedField(source='product_size.size',queryset=Size.objects.all())
+    product_type = serializers.PrimaryKeyRelatedField(source='product_type.name_product_type',queryset=ProductType.objects.all())
+    product_category = serializers.PrimaryKeyRelatedField(source='product_category.name_product_category',queryset=ProductCategory.objects.all())
+
+
     class Meta:
         model = Product
         fields = ['name_product','color','price','product_category','product_size','product_type']
@@ -24,6 +29,9 @@ class ProductSerializer(serializers.ModelSerializer):
         if data < 0:
             raise serializers.ValidationError({"error": "Price less than zero"})
         return data
+    
+    def create(self,validated_data):
+        return Product.objects.create(**validated_data)
     
 class ProductUpdateSerializer(serializers.ModelSerializer):
 
