@@ -16,11 +16,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductCategoryListSerializer(serializers.ModelSerializer):
 
-    category_product = ProductSerializer(many=True)
+    product = serializers.SerializerMethodField()
 
     class Meta:
         model = ProductCategory
-        fields = ['id','name_product_category','category_product']
+        fields = ['id','name_product_category','product']
+
+    def get_product(self,instance):
+        return Product.objects.all().values('name_product','color','price')
 
 class ProductListSerializer(serializers.ModelSerializer):
 
