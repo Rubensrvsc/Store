@@ -10,6 +10,7 @@ urlpatterns = format_suffix_patterns([
     
     path('producttypes',ProductTypeView.as_view(),name="product_types"),
     path('productcategories',ProductCategoryView.as_view(),name="product_categories"),
+    path('createcategory',ProductCategoryCreateView.as_view(),name='create-category'),
     path('products',ProductView.as_view(),name="products"),
     path('create_product/',ProductCreateView.as_view(),name="create_product"),
     path('products/<int:id>',ProductDetailView.as_view(),name="product-detail"),
