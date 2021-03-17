@@ -55,4 +55,12 @@ class SearchProductNameSerializer(serializers.Serializer):
         if data is None:
             raise serializers.ValidationError({'error':'name is empty'})
         return data
+
+
+
+class SearchProductPriceSerializer(serializers.Serializer):
+    price_one = serializers.FloatField()
+    price_two = serializers.FloatField()
+
+    
     

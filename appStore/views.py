@@ -10,6 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from rest_framework import status
+from django.db.models import Q
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def api_root(request,format=None):
         'products': reverse('api:products',request=request,format=format),
         'create product': reverse('api:create_product',request=request,format=format),
         'search product': reverse('api:search-product',request=request,format=format),
+        'search price product': reverse('api:search-price-product',request=request,format=format),
         'product type': reverse('api:product_types',request=request,format=format),
         'product category': reverse('api:product_categories',request=request,format=format),
     })
@@ -62,3 +64,25 @@ class SearchProductView(APIView):
         return JsonResponse(list(self.queryset.filter(name_product__contains=request.data['name_search_product']).values('name_product',
         'color','price','product_size__size','product_category__name_product_category',
         'product_type__name_product_type')),safe=False)
+
+
+
+class SearchPriceProductView(APIView):
+    queryset = Product.objects.all()
+    serializer_class = SearchProductPriceSerializer
+
+    def get(self,request):
+        return Response(status=status.HTTP_200_OK)
+
+    def post(self,request):
+        if request.data['price_one'] == "" or float(request.data["price_one"]) < 0:
+            raise serializers.ValidationError({'error':'Price one is empty'})
+        elif request.data['price_two'] == "" or float(request.data["price_two"]) < 0:
+            raise serializers.ValidationError({'error':'Price two is empty'})
+            
+        query = list(self.queryset.filter(Q(price__gte=request.data['price_one']) & Q(price__lte=request.data['price_two'])).values(
+            'name_product','color','price',
+            'product_size__size','product_category__name_product_category',
+            'product_type__name_product_type'
+        ))
+        return JsonResponse(query,safe=False)
