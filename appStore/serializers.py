@@ -8,17 +8,19 @@ class ProductTypeSerializer(serializers.ModelSerializer):
         model = ProductType
         fields = ['name_product_type']
 
-class ProductCategorySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ProductCategory
-        fields = '__all__'
-
 class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
         fields = '__all__'
+
+class ProductCategoryListSerializer(serializers.ModelSerializer):
+
+    category_product = ProductSerializer(many=True)
+
+    class Meta:
+        model = ProductCategory
+        fields = ['id','name_product_category','category_product']
 
 class ProductListSerializer(serializers.ModelSerializer):
 
