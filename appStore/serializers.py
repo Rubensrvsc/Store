@@ -23,7 +23,7 @@ class ProductCategoryListSerializer(serializers.ModelSerializer):
         fields = ['id','name_product_category','product']
 
     def get_product(self,instance):
-        return Product.objects.all().values('name_product','color','price')
+        return Product.objects.filter(product_category=instance.id).values('name_product','color','price')
 
 class ProductCategoryCreateSerializer(serializers.ModelSerializer):
 
