@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from rest_framework import status
 from django.db.models import Q
+from rest_framework import filters
 
 # Create your views here.
 
@@ -33,6 +34,8 @@ class ProductTypeView(generics.ListCreateAPIView):
 class ProductCategoryView(generics.ListAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategoryListSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name_product_category']
 
 class ProductCategoryCreateView(generics.CreateAPIView):
     queryset = ProductCategory.objects.all()
@@ -43,6 +46,7 @@ class ProductView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     pagination_class = PageNumberPagination
+    
 
 class ProductCreateView(generics.CreateAPIView):
     queryset = Product.objects.all()
