@@ -41,7 +41,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['name_product','color','price','product_category','product_size','product_type']
-
+        filterset_fields = {'price': ['gte','lte']}
     
 class ProductUpdateSerializer(serializers.ModelSerializer):
 

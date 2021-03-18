@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .serializers import *
+from .filters import *
 import json
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -47,7 +48,7 @@ class ProductView(generics.ListAPIView):
     serializer_class = ProductListSerializer
     pagination_class = PageNumberPagination
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name_product']
+    search_fields = ['name_product','price']
 
 class ProductCreateView(generics.CreateAPIView):
     queryset = Product.objects.all()
