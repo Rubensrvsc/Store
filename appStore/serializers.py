@@ -36,12 +36,11 @@ class ProductListSerializer(serializers.ModelSerializer):
     product_size = serializers.PrimaryKeyRelatedField(source='product_size.size',queryset=Size.objects.all())
     product_type = serializers.PrimaryKeyRelatedField(source='product_type.name_product_type',queryset=ProductType.objects.all())
     product_category = serializers.PrimaryKeyRelatedField(source='product_category.name_product_category',queryset=ProductCategory.objects.all())
-
+    
 
     class Meta:
         model = Product
         fields = ['name_product','color','price','product_category','product_size','product_type']
-        filterset_fields = {'price': ['gte','lte']}
     
 class ProductUpdateSerializer(serializers.ModelSerializer):
 
@@ -66,12 +65,3 @@ class SearchProductNameSerializer(serializers.Serializer):
         if data is None:
             raise serializers.ValidationError({'error':'name is empty'})
         return data
-
-
-
-class SearchProductPriceSerializer(serializers.Serializer):
-    price_one = serializers.FloatField()
-    price_two = serializers.FloatField()
-
-    
-    

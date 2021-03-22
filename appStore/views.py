@@ -80,20 +80,23 @@ class SearchProductView(APIView):
 
 class SearchPriceProductView(APIView):
     queryset = Product.objects.all()
-    serializer_class = SearchProductPriceSerializer
 
-    def get(self,request):
-        return Response(status=status.HTTP_200_OK)
-
-    def post(self,request):
-        if request.data['price_one'] == "" or float(request.data["price_one"]) < 0:
-            raise serializers.ValidationError({'error':'Price one is empty'})
-        elif request.data['price_two'] == "" or float(request.data["price_two"]) < 0:
-            raise serializers.ValidationError({'error':'Price two is empty'})
-            
-        query = list(self.queryset.filter(Q(price__gte=request.data['price_one']) & Q(price__lte=request.data['price_two'])).values(
+    def get(self,request,*args,**kwargs):
+        if float(self.kwargs["price_one"]) <= 0:
+            raise serializers.ValidationError({'error':'Price one is empty or less the zero'})
+        elif float(self.kwargs["price_two"]) <= 0:
+            raise serializers.ValidationError({'error':'Price two is empty or less the zero'})
+        elif float(self.kwargs["price_one"]) > float(self.kwargs["price_two"]):
+            raise serializers.ValidationError({'error':'Price one more than price two'})
+        
+        price_one = float(self.kwargs["price_one"])
+        price_two = float(self.kwargs["price_two"])
+        
+        query = self.queryset.filter(Q(price__gte=price_one) & Q(price__lte=price_two)).values(
             'name_product','color','price',
             'product_size__size','product_category__name_product_category',
             'product_type__name_product_type'
-        ))
-        return JsonResponse(query,safe=False)
+        )
+        return Response(query)
+
+ 
