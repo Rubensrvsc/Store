@@ -17,3 +17,9 @@ class ProductCategoryTest(TestCase):
         product_category = {"name_product_category": "infantil"}
         request = factory.post('/createcategory',product_category)
         self.assertEquals(request.status_code,status.HTTP_201_CREATED)
+
+    def test_list_product_category(self):
+        factory = APIClient()
+        products_categories = ProductCategory.objects.all().count()
+        request = factory.get("/productcategories")
+        self.assertEquals(products_categories,3)
