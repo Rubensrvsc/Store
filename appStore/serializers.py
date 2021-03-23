@@ -70,4 +70,4 @@ class SizeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Size
-        field = '__all__'
+        fields = '__all__'
