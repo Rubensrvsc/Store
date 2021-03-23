@@ -65,3 +65,9 @@ class SearchProductNameSerializer(serializers.Serializer):
         if data is None:
             raise serializers.ValidationError({'error':'name is empty'})
         return data
+
+class SizeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Size
+        field = '__all__'

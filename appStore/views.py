@@ -22,6 +22,7 @@ def api_root(request,format=None):
         'create product': reverse('api:create_product',request=request,format=format),
         'search product': reverse('api:search-product',request=request,format=format),
         'product type': reverse('api:product_types',request=request,format=format),
+        'create size': reverse('api:size-list-create',request=request,format=format),
         'product category': reverse('api:product_categories',request=request,format=format),
         'create category': reverse('api:create-category',request=request,format=format),
     })
@@ -39,6 +40,13 @@ class ProductCategoryView(generics.ListAPIView):
 class ProductCategoryCreateView(generics.CreateAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategoryCreateSerializer
+
+class SizeListCreateView(generics.ListCreateAPIView):
+    queryset = Size.objects.all()
+    serializer_class = SizeSerializer
+
+    def get(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_200_OK)
 
 class ProductView(generics.ListAPIView):
     lookup_field = "id"
