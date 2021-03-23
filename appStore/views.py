@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import *
 from .serializers import *
-from .filters import *
 import json
 from rest_framework import generics
 from rest_framework.decorators import api_view
