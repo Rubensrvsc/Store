@@ -41,6 +41,9 @@ class ProductCategoryCreateView(generics.CreateAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategoryCreateSerializer
 
+    def get(self,request):
+        return Response(status=status.HTTP_200_OK)
+
 class SizeListCreateView(generics.ListCreateAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
