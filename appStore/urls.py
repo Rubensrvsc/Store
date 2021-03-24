@@ -14,6 +14,7 @@ urlpatterns = format_suffix_patterns([
     path('products',ProductView.as_view(),name="products"),
     path('create_product/',ProductCreateView.as_view(),name="create_product"),
     path('size',SizeListCreateView.as_view(),name='size-list-create'),
+    path(),
     path('products/<int:id>',ProductDetailView.as_view(),name="product-detail"),
     path('updateproduct/<int:id>',ProductUpdateView.as_view(),name="update-product"),
     path('searchpriceproduct/<str:price_one>/<str:price_two>',SearchPriceProductView.as_view(),name="search-price-product"),
