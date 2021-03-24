@@ -3,19 +3,19 @@ from django.db import models
 # Create your models here.
 
 class ProductType(models.Model):
-    name_product_type = models.CharField(max_length=30)
+    name_product_type = models.CharField(max_length=30,unique=True)
 
     def __str__(self):
         return self.name_product_type
 
 class Size(models.Model):
-    size = models.CharField(max_length=30)
+    size = models.CharField(max_length=30,unique=True)
 
     def __str__(self):
         return self.size
     
 class ProductCategory(models.Model):
-    name_product_category = models.CharField(max_length=30)
+    name_product_category = models.CharField(max_length=30,unique=True)
 
     def __str__(self):
         return self.name_product_category
