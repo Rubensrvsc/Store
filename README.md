@@ -36,3 +36,42 @@ Abaixo pode ser vistos os endpoints com uma breve descrição
 | POST | `http://localhost:8000/producttypes` | Cria um tipo de produto |
 | GET | `http://localhost:8000/producttypes` | Lista todos os tipos de produtos |
 
+
+### Descrição dos EndPoints
+
+#### /producttypes [POST]
+
+| Parâmetro | Tipo | 
+|---|---|
+| `name_product_type` | String |
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "name_product_type": "Camisa",
+            }
+
++ Response 201 Created (application/json)
+
+#### /producttypes [GET]
+
++ Response 201 Created (application/json)
+
+  + Body
+
+        [
+          {
+            "name_product_type": "Camisa"
+          },
+          {
+            "name_product_type": "Calça"
+          },
+          {
+            "name_product_type": "Camisa Regata"
+          }
+        ]
+
+
+
