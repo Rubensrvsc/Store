@@ -48,9 +48,6 @@ class SizeListCreateView(generics.ListCreateAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
 
-    def get(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_200_OK)
-
 class ProductView(generics.ListAPIView):
     lookup_field = "id"
     queryset = Product.objects.all()
