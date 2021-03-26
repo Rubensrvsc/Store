@@ -3,7 +3,7 @@
 
 Construção de uma API de loja de roupas.
 Para que os donos de lojas de roupas pudessem ter um maior controle de estoque do seu estabelecimento se faz necessário a construção de sistemas
-que possam ajudar o empresário dono da loja.
+que possam ajudar no gerenciamento dos produtos de sua loja.
 
 Em virtude do que foi citado construí essa API com o objetivo de proporcionar um melhor conhecimento dos produtos que estão no estoque da loja
 
