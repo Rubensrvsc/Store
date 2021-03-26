@@ -63,6 +63,13 @@ class ProductCategoryTest(TestCase):
         response = factory.post('/create_product',product)
         self.assertEquals(response.status_code,status.HTTP_301_MOVED_PERMANENTLY)
 
+    def test_get_product(self):
+
+        factory = APIClient()
+        response = factory.get('/products')
+        self.assertEquals(response.status_code,status.HTTP_200_OK)
+
+
 
     
 
