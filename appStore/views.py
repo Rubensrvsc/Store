@@ -20,7 +20,6 @@ def api_root(request,format=None):
     return Response({
         'products': reverse('api:products',request=request,format=format),
         'create product': reverse('api:create_product',request=request,format=format),
-        'search product': reverse('api:search-product',request=request,format=format),
         'product type': reverse('api:product_types',request=request,format=format),
         'create size': reverse('api:size-list-create',request=request,format=format),
         'product category': reverse('api:product_categories',request=request,format=format),
